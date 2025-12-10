@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/homepage.css">
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/letters.css">
+    <link rel="stylesheet" href="assets/css/polaroid.css">
+    <link rel="stylesheet" href="assets/css/countdowns.css">
+    <link rel="stylesheet" href="assets/css/story.css">
+</head>
+<body>
+    <!-- Homepage -->
+    <div class="screen homepage active">
+        <h1>Hey Baby,<br>I made something for us,<br>Hope you like it 💕</h1>
+        <button class="wiggle-btn" onclick="showScreen('menu')">❤️ Open</button>
+    </div>
+
+    <!-- Menu -->
+    <div class="screen menu">
+        <h2>Where will you like to go first? 💫</h2>
+        <div class="menu-grid">
+            <button class="menu-btn" onclick="showScreen('letters')">
+                <span>💌</span> Love Letters
+            </button>
+            <button class="menu-btn" onclick="showScreen('polaroid')">
+                <span>📸</span> Our Memories
+            </button>
+            <button class="menu-btn" onclick="showScreen('countdowns')">
+                <span>⏰</span> Countdowns
+            </button>
+            <button class="menu-btn" onclick="showScreen('story')">
+                <span>📖</span> Our Story
+            </button>
+        </div>
+    </div>
+
+    <!-- Love Letters Section -->
+    <div class="screen section" id="letters">
+        <h2>💌 Love Letters</h2>
+        <div class="letters-container" id="lettersContainer"></div>
+        <button class="back-btn" onclick="showScreen('menu')">← Back to Menu</button>
+    </div>
+
+    <!-- Letter Reader Modal -->
+    <div class="letter-modal" id="letterModal">
+        <div class="letter-content">
+            <button class="close-letter" onclick="closeLetter()">✕</button>
+            <div class="letter-paper">
+                <div class="letter-date" id="letterDate"></div>
+                <div class="letter-text" id="letterText"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Polaroid Wall Section -->
+    <div class="screen section" id="polaroid">
+        <h2>📸 Our Memories</h2>
+        <div class="polaroid-instructions">Click and drag to explore • Click photos to enlarge</div>
+        <button class="reset-view-btn" onclick="resetView()">🎯 Reset View</button>
+        <div class="polaroid-canvas" id="polaroidCanvas">
+            <div class="polaroid-container" id="polaroidContainer"></div>
+        </div>
+        <button class="back-btn" onclick="showScreen('menu')">← Back to Menu</button>
+    </div>
+
+    <!-- Photo Viewer Modal -->
+    <div class="photo-modal" id="photoModal">
+        <div class="photo-modal-content">
+            <button class="close-photo" onclick="closePhoto()">✕</button>
+            <img id="modalImage" src="" alt="Memory">
+            <div class="photo-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <!-- Countdowns Section -->
+    <div class="screen section" id="countdowns">
+        <h2>⏰ Countdowns</h2>
+        <div class="countdowns-container" id="countdownsContainer"></div>
+        <button class="back-btn" onclick="showScreen('menu')">← Back to Menu</button>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="screen section" id="story">
+        <h2>📖 Our Story</h2>
+        <div class="story-book">
+            <div class="story-page" id="storyPage">
+                <div class="page-content" id="pageContent"></div>
+            </div>
+            <div class="story-navigation">
+                <button class="story-nav-btn" id="prevBtn" onclick="previousPage()">← Previous</button>
+                <span class="page-number" id="pageNumber">1 / 1</span>
+                <button class="story-nav-btn" id="nextBtn" onclick="nextPage()">Next →</button>
+            </div>
+        </div>
+        <button class="back-btn" onclick="showScreen('menu')">← Back to Menu</button>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/letters.js"></script>
+    <script src="assets/js/polaroid.js"></script>
+    <script src="assets/js/countdowns.js"></script>
+    <script src="assets/js/story.js"></script>
+</body>
+</html>

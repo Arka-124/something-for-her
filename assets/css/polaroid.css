@@ -1,0 +1,187 @@
+/* ===================================
+   POLAROID WALL STYLES
+   =================================== */
+
+.polaroid-instructions {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.reset-view-btn {
+    background: white;
+    color: #ff69b4;
+    border: 2px solid #ff69b4;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.reset-view-btn:hover {
+    background: #ff69b4;
+    color: white;
+}
+
+.polaroid-canvas {
+    width: 100%;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+    margin-bottom: 20px;
+}
+
+.polaroid-canvas:active {
+    cursor: grabbing;
+}
+
+.polaroid-container {
+    position: absolute;
+    width: 3000px;
+    height: 3000px;
+    transition: transform 0.1s ease-out;
+}
+
+.polaroid {
+    position: absolute;
+    width: 200px;
+    background: white;
+    padding: 15px 15px 60px 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.polaroid:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    z-index: 100;
+}
+
+.polaroid-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 3rem;
+}
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-text {
+    margin-top: 15px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.polaroid-date {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 5px;
+}
+
+/* ===================================
+   PHOTO MODAL
+   =================================== */
+
+.photo-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.photo-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.photo-modal-content {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+}
+
+.close-photo {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.close-photo:hover {
+    transform: scale(1.1);
+}
+
+#modalImage {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    background: white;
+    padding: 20px;
+}
+
+.photo-caption {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+    .polaroid-canvas {
+        height: 400px;
+    }
+
+    .polaroid {
+        width: 150px;
+        padding: 10px 10px 50px 10px;
+    }
+
+    .polaroid-image {
+        height: 150px;
+    }
+}

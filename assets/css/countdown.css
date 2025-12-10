@@ -1,0 +1,111 @@
+/* ===================================
+   COUNTDOWNS STYLES
+   =================================== */
+
+.countdowns-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.countdown-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.countdown-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.countdown-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.countdown-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.countdown-subtitle {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff69b4;
+    font-family: 'Courier New', monospace;
+    background: #ffe4e9;
+    padding: 10px 15px;
+    border-radius: 10px;
+    min-width: 60px;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.countdown-type {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.countdown-up {
+    background: #d4edda;
+    color: #155724;
+}
+
+.countdown-down {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+    .countdowns-container {
+        grid-template-columns: 1fr;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem;
+        min-width: 50px;
+        padding: 8px 10px;
+    }
+}
