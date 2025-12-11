@@ -16,15 +16,12 @@
 function loadCustomData(key, defaultData) {
     const customData = JSON.parse(localStorage.getItem(key) || '[]');
     return [...defaultData, ...customData];
-
-// Load story chapters (default + custom from localStorage)
-const storyChapters = loadCustomData('customStory', defaultChapters);
 }
 
 // ===================================
 // DEFAULT LOVE LETTERS DATA
 // ===================================
-const loveLetters = [
+const defaultLetters = [
     {
         date: "July 19, 2025",
         preview: "Letter One: The Beginning",
@@ -112,12 +109,12 @@ Still here. Still trying to be worthy of you.
 Always,
 Me`
     },
-{
-  date: "26th September, 2024",
-  preview: "Letter Four: The Last Chance",
-  image: "",
-  isRead: false,
-  content: `Hey Babyy,
+    {
+        date: "26th September, 2024",
+        preview: "Letter Four: The Last Chance",
+        image: "",
+        isRead: false,
+        content: `Hey Babyy,
 
 The previous day, you ignored me completely. Every message I sent disappeared into silence. Every attempt to reach you hit a wall. And I thought—no, I *knew*—it was over.
 
@@ -155,8 +152,7 @@ Thank you for that message. Thank you for that last chance. Thank you for jumpin
 
 Forever grateful, forever yours,  
 Me`
-}
-
+    }
 ];
 
 // Load letters (default + custom from localStorage)
@@ -315,3 +311,6 @@ I can't wait to see what the next chapters hold for us. But I know one thing for
 Forever and always. 💕✨`
     }
 ];
+
+// Load story chapters (default + custom from localStorage)
+const storyChapters = loadCustomData('customStory', defaultChapters);
