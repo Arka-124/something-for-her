@@ -11,7 +11,7 @@
 
 // 🔧 REPLACE THESE WITH YOUR SUPABASE CREDENTIALS
 const SUPABASE_URL = 'https://tywbsantfxrwwldihgal.supabase.co'; // Example: https://xxxxx.supabase.co
-const SUPABASE_KEY = 'sb_secret_dASqrYC_4Uxsw2PliybBGA_Ub5kIvm6';    // Long string starting with eyJhbGc...
+const SUPABASE_KEY = 'sb_publishable_Rq4EH8KoUBQXN1M5ywPqBg_3VuvK4nI';    // Long string starting with eyJhbGc...
 
 // ===================================
 // SUPABASE CLIENT INITIALIZATION
