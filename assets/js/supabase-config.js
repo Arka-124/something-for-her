@@ -10,8 +10,8 @@
    =================================== */
 
 // 🔧 REPLACE THESE WITH YOUR SUPABASE CREDENTIALS
-const SUPABASE_URL = 'YOUR_PROJECT_URL_HERE'; // Example: https://xxxxx.supabase.co
-const SUPABASE_KEY = 'YOUR_ANON_KEY_HERE';    // Long string starting with eyJhbGc...
+const SUPABASE_URL = 'https://tywbsantfxrwwldihgal.supabase.co'; // Example: https://xxxxx.supabase.co
+const SUPABASE_KEY = 'sb_secret_dASqrYC_4Uxsw2PliybBGA_Ub5kIvm6';    // Long string starting with eyJhbGc...
 
 // ===================================
 // SUPABASE CLIENT INITIALIZATION
