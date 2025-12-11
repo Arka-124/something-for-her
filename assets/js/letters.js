@@ -9,10 +9,18 @@ function initializeLetters() {
     const container = document.getElementById('lettersContainer');
     container.innerHTML = '';
     
-    loveLetters.forEach((letter, index) => {
+    // Sort letters by date (most recent first)
+    const sortedLetters = [...loveLetters].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA; // Descending order (newest first)
+    });
+    
+    sortedLetters.forEach((letter, index) => {
+        const originalIndex = loveLetters.indexOf(letter);
         const envelope = document.createElement('div');
         envelope.className = 'envelope' + (index === 0 && !letter.isRead ? ' newest' : '');
-        envelope.onclick = () => openLetter(index);
+        envelope.onclick = () => openLetter(originalIndex);
         
         envelope.innerHTML = `
             ${index === 0 && !letter.isRead ? '<div class="new-badge">NEW</div>' : ''}

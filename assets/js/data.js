@@ -5,10 +5,24 @@
    - Add your image URLs in the empty image: "" fields
    - Update dates in countdownEvents
    - Modify letter content, story chapters, etc.
+   
+   NEW: Use admin.html to add content through forms!
+   Data is now stored in localStorage and merged with default data.
    =================================== */
 
 // ===================================
-// LOVE LETTERS DATA
+// LOAD CUSTOM DATA FROM LOCALSTORAGE
+// ===================================
+function loadCustomData(key, defaultData) {
+    const customData = JSON.parse(localStorage.getItem(key) || '[]');
+    return [...defaultData, ...customData];
+
+// Load story chapters (default + custom from localStorage)
+const storyChapters = loadCustomData('customStory', defaultChapters);
+}
+
+// ===================================
+// DEFAULT LOVE LETTERS DATA
 // ===================================
 const loveLetters = [
     {
@@ -145,10 +159,13 @@ Me`
 
 ];
 
+// Load letters (default + custom from localStorage)
+const loveLetters = loadCustomData('customLetters', defaultLetters);
+
 // ===================================
-// POLAROID MEMORIES DATA
+// DEFAULT POLAROID MEMORIES DATA
 // ===================================
-const memories = [
+const defaultMemories = [
     {
         image: "", // Add image URL here
         caption: "Our first video call 💕",
@@ -211,44 +228,50 @@ const memories = [
     }
 ];
 
+// Load memories (default + custom from localStorage)
+const memories = loadCustomData('customMemories', defaultMemories);
+
 // ===================================
-// COUNTDOWN EVENTS DATA
+// DEFAULT COUNTDOWN EVENTS DATA
 // ===================================
-const countdownEvents = [
+const defaultCountdowns = [
     {
         icon: "💕",
         title: "Days Together",
         subtitle: "Since we started our journey",
-        date: "2025-10-02", // CHANGE THIS: When you met (YYYY-MM-DD)
+        date: "2024-01-15", // CHANGE THIS: When you met (YYYY-MM-DD)
         type: "up" // Counting up
     },
     {
         icon: "✈️",
         title: "Until We Meet",
         subtitle: "Can't wait to see you!",
-        date: "2026-01-06", // CHANGE THIS: Next meeting date (YYYY-MM-DD)
+        date: "2025-02-14", // CHANGE THIS: Next meeting date (YYYY-MM-DD)
         type: "down" // Counting down
     },
     {
         icon: "🎉",
         title: "Our Anniversary",
         subtitle: "Celebrating our love",
-        date: "2026-01-02", // CHANGE THIS: Anniversary date (YYYY-MM-DD)
+        date: "2025-01-15", // CHANGE THIS: Anniversary date (YYYY-MM-DD)
         type: "down"
     },
     {
         icon: "🎂",
         title: "Your Birthday",
         subtitle: "Special day coming up!",
-        date: "2026-05-11", // CHANGE THIS: Her birthday (YYYY-MM-DD)
+        date: "2025-03-20", // CHANGE THIS: Her birthday (YYYY-MM-DD)
         type: "down"
     }
 ];
 
+// Load countdowns (default + custom from localStorage)
+const countdownEvents = loadCustomData('customCountdowns', defaultCountdowns);
+
 // ===================================
-// STORY CHAPTERS DATA
+// DEFAULT STORY CHAPTERS DATA
 // ===================================
-const storyChapters = [
+const defaultChapters = [
     {
         title: "Chapter 1: How We Met",
         date: "The Beginning",

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Add Content</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn.active {
+            background: #764ba2;
+            color: white;
+        }
+
+        .form-section {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-section h2 {
+            color: #764ba2;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .submit-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #5a3a7d;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            border: 1px solid #c3e6cb;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .view-website {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-website a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .view-website a:hover {
+            background: white;
+            color: #764ba2;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border: 2px dashed #764ba2;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            background: #e9ecef;
+            border-color: #5a3a7d;
+        }
+
+        .file-name {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .image-preview.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                padding: 25px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Admin Panel</h1>
+            <p>Add new content to your romantic website</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showForm('letter')">💌 Add Letter</button>
+            <button class="nav-btn" onclick="showForm('memory')">📸 Add Memory</button>
+            <button class="nav-btn" onclick="showForm('countdown')">⏰ Add Countdown</button>
+            <button class="nav-btn" onclick="showForm('story')">📖 Add Story Chapter</button>
+        </div>
+
+        <!-- Add Letter Form -->
+        <div class="form-section active" id="letterForm">
+            <h2>💌 Add New Love Letter</h2>
+            <div class="success-message" id="letterSuccess">Letter added successfully! 🎉</div>
+            
+            <form onsubmit="addLetter(event)">
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="letterDate" required>
+                    <small>The date of your letter</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Preview Text *</label>
+                    <input type="text" id="letterPreview" placeholder="My Dearest Love..." required maxlength="50">
+                    <small>Short preview shown on the envelope (max 50 characters)</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Image (Optional)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="letterImage" accept="image/*" onchange="previewImage(event, 'letterImagePreview', 'letterImageName')">
+                        <label for="letterImage" class="file-input-label">
+                            📷 Click to upload image
+                        </label>
+                    </div>
+                    <span class="file-name" id="letterImageName"></span>
+                    <img id="letterImagePreview" class="image-preview">
+                </div>
+
+                <div class="form-group">
+                    <label>Letter Content *</label>
+                    <textarea id="letterContent" placeholder="Write your letter here..." required></textarea>
+                    <small>The full content of your love letter</small>
+                </div>
+
+                <button type="submit" class="submit-btn">💝 Add Letter</button>
+            </form>
+        </div>
+
+        <!-- Add Memory Form -->
+        <div class="form-section" id="memoryForm">
+            <h2>📸 Add New Memory</h2>
+            <div class="success-message" id="memorySuccess">Memory added successfully! 🎉</div>
+            
+            <form onsubmit="addMemory(event)">
+                <div class="form-group">
+                    <label>Image (Optional)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="memoryImage" accept="image/*" onchange="previewImage(event, 'memoryImagePreview', 'memoryImageName')">
+                        <label for="memoryImage" class="file-input-label">
+                            📷 Click to upload photo
+                        </label>
+                    </div>
+                    <span class="file-name" id="memoryImageName"></span>
+                    <img id="memoryImagePreview" class="image-preview">
+                </div>
+
+                <div class="form-group">
+                    <label>Caption *</label>
+                    <input type="text" id="memoryCaption" placeholder="Our first video call 💕" required>
+                    <small>Short description of this memory</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="text" id="memoryDate" placeholder="January 2024" required>
+                    <small>When this memory happened</small>
+                </div>
+
+                <button type="submit" class="submit-btn">📸 Add Memory</button>
+            </form>
+        </div>
+
+        <!-- Add Countdown Form -->
+        <div class="form-section" id="countdownForm">
+            <h2>⏰ Add New Countdown</h2>
+            <div class="success-message" id="countdownSuccess">Countdown added successfully! 🎉</div>
+            
+            <form onsubmit="addCountdown(event)">
+                <div class="form-group">
+                    <label>Icon *</label>
+                    <input type="text" id="countdownIcon" placeholder="💕" required maxlength="2">
+                    <small>Single emoji icon for the countdown</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" id="countdownTitle" placeholder="Days Together" required>
+                    <small>Main title of the countdown</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Subtitle *</label>
+                    <input type="text" id="countdownSubtitle" placeholder="Since we started our journey" required>
+                    <small>Short description</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="countdownDate" required>
+                    <small>Target date for the countdown</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Type *</label>
+                    <select id="countdownType" required>
+                        <option value="up">Count Up (from date)</option>
+                        <option value="down">Count Down (to date)</option>
+                    </select>
+                    <small>Count up from a past date or count down to a future date</small>
+                </div>
+
+                <button type="submit" class="submit-btn">⏰ Add Countdown</button>
+            </form>
+        </div>
+
+        <!-- Add Story Chapter Form -->
+        <div class="form-section" id="storyForm">
+            <h2>📖 Add New Story Chapter</h2>
+            <div class="success-message" id="storySuccess">Chapter added successfully! 🎉</div>
+            
+            <form onsubmit="addStory(event)">
+                <div class="form-group">
+                    <label>Chapter Title *</label>
+                    <input type="text" id="storyTitle" placeholder="Chapter 5: Our Adventure" required>
+                    <small>Title of this chapter</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Date/Subtitle *</label>
+                    <input type="text" id="storyDate" placeholder="The Journey Continues" required>
+                    <small>Date or subtitle for this chapter</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Image (Optional)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="storyImage" accept="image/*" onchange="previewImage(event, 'storyImagePreview', 'storyImageName')">
+                        <label for="storyImage" class="file-input-label">
+                            📷 Click to upload image
+                        </label>
+                    </div>
+                    <span class="file-name" id="storyImageName"></span>
+                    <img id="storyImagePreview" class="image-preview">
+                </div>
+
+                <div class="form-group">
+                    <label>Chapter Text *</label>
+                    <textarea id="storyText" placeholder="Write your story here..." required></textarea>
+                    <small>The content of this chapter</small>
+                </div>
+
+                <button type="submit" class="submit-btn">📖 Add Chapter</button>
+            </form>
+        </div>
+
+        <div class="view-website">
+            <a href="index.html">👀 View Website</a>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide forms
+        function showForm(formType) {
+            // Hide all forms
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active state from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected form
+            const formMap = {
+                'letter': 'letterForm',
+                'memory': 'memoryForm',
+                'countdown': 'countdownForm',
+                'story': 'storyForm'
+            };
+
+            document.getElementById(formMap[formType]).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Image preview
+        function previewImage(event, previewId, nameId) {
+            const file = event.target.files[0];
+            const preview = document.getElementById(previewId);
+            const nameSpan = document.getElementById(nameId);
+
+            if (file) {
+                nameSpan.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.add('show');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Show success message
+        function showSuccess(messageId) {
+            const message = document.getElementById(messageId);
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        // Add Letter
+        function addLetter(event) {
+            event.preventDefault();
+
+            const date = document.getElementById('letterDate').value;
+            const preview = document.getElementById('letterPreview').value;
+            const content = document.getElementById('letterContent').value;
+            const imageFile = document.getElementById('letterImage').files[0];
+
+            // Format date
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            let imageData = '';
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageData = e.target.result;
+                    saveLetter(formattedDate, preview, content, imageData);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                saveLetter(formattedDate, preview, content, '');
+            }
+        }
+
+        function saveLetter(date, preview, content, image) {
+            const newLetter = {
+                date: date,
+                preview: preview,
+                image: image,
+                isRead: false,
+                content: content
+            };
+
+            // Get existing letters
+            let letters = JSON.parse(localStorage.getItem('customLetters') || '[]');
+            letters.push(newLetter);
+            localStorage.setItem('customLetters', JSON.stringify(letters));
+
+            showSuccess('letterSuccess');
+            document.querySelector('#letterForm form').reset();
+            document.getElementById('letterImagePreview').classList.remove('show');
+            document.getElementById('letterImageName').textContent = '';
+        }
+
+        // Add Memory
+        function addMemory(event) {
+            event.preventDefault();
+
+            const caption = document.getElementById('memoryCaption').value;
+            const date = document.getElementById('memoryDate').value;
+            const imageFile = document.getElementById('memoryImage').files[0];
+
+            let imageData = '';
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageData = e.target.result;
+                    saveMemory(caption, date, imageData);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                saveMemory(caption, date, '');
+            }
+        }
+
+        function saveMemory(caption, date, image) {
+            const newMemory = {
+                image: image,
+                caption: caption,
+                date: date
+            };
+
+            let memories = JSON.parse(localStorage.getItem('customMemories') || '[]');
+            memories.push(newMemory);
+            localStorage.setItem('customMemories', JSON.stringify(memories));
+
+            showSuccess('memorySuccess');
+            document.querySelector('#memoryForm form').reset();
+            document.getElementById('memoryImagePreview').classList.remove('show');
+            document.getElementById('memoryImageName').textContent = '';
+        }
+
+        // Add Countdown
+        function addCountdown(event) {
+            event.preventDefault();
+
+            const newCountdown = {
+                icon: document.getElementById('countdownIcon').value,
+                title: document.getElementById('countdownTitle').value,
+                subtitle: document.getElementById('countdownSubtitle').value,
+                date: document.getElementById('countdownDate').value,
+                type: document.getElementById('countdownType').value
+            };
+
+            let countdowns = JSON.parse(localStorage.getItem('customCountdowns') || '[]');
+            countdowns.push(newCountdown);
+            localStorage.setItem('customCountdowns', JSON.stringify(countdowns));
+
+            showSuccess('countdownSuccess');
+            document.querySelector('#countdownForm form').reset();
+        }
+
+        // Add Story Chapter
+        function addStory(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('storyTitle').value;
+            const date = document.getElementById('storyDate').value;
+            const text = document.getElementById('storyText').value;
+            const imageFile = document.getElementById('storyImage').files[0];
+
+            let imageData = '';
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageData = e.target.result;
+                    saveStory(title, date, text, imageData);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                saveStory(title, date, text, '');
+            }
+        }
+
+        function saveStory(title, date, text, image) {
+            const newChapter = {
+                title: title,
+                date: date,
+                image: image,
+                text: text
+            };
+
+            let chapters = JSON.parse(localStorage.getItem('customStory') || '[]');
+            chapters.push(newChapter);
+            localStorage.setItem('customStory', JSON.stringify(chapters));
+
+            showSuccess('storySuccess');
+            document.querySelector('#storyForm form').reset();
+            document.getElementById('storyImagePreview').classList.remove('show');
+            document.getElementById('storyImageName').textContent = '';
+        }
+    </script>
+</body>
+</html>
